@@ -1,46 +1,48 @@
 //+------------------------------------------------------------------+
-//|                                                         Info.mq4 |
+//|                                                     KursInfo.mq4 |
 //|                                                    Dominik Liehr |
 //|                                            http://www.idragon.de |
 //+------------------------------------------------------------------+
-// Version 1.1
+// Version 1.2
 #property copyright "Dominik Liehr"
 #property link "http://www.idragon.de"
 
+int globalFontSize = 25;
+int globalDistanceX1 = 20;
+int globalDistanceX2 = 150;
+
 int init() {
   // Objekte erzeugen
-  ObjectCreate("label_ask", OBJ_LABEL, 0, 0, 0, 0, 0, 0, 0);
-  ObjectSetText("label_ask", "ask", 30, "Arial", DeepSkyBlue);
-  ObjectSet("label_ask", OBJPROP_XDISTANCE, 20);
-  ObjectSet("label_ask", OBJPROP_YDISTANCE, 100);
+  ObjectCreate("label_ask1", OBJ_LABEL, 0, 0, 0, 0, 0, 0, 0);
+  ObjectSetText("label_ask1", "Ask:", globalFontSize, "Arial", DeepSkyBlue);
+  ObjectSet("label_ask1", OBJPROP_XDISTANCE, globalDistanceX1);
+  ObjectSet("label_ask1", OBJPROP_YDISTANCE, 100);
 
-  ObjectCreate("label_bid", OBJ_LABEL, 0, 0, 0, 0, 0, 0, 0);
-  ObjectSetText("label_bid", "bid", 25, "Arial", Red);
-  ObjectSet("label_bid", OBJPROP_XDISTANCE, 29);
-  ObjectSet("label_bid", OBJPROP_YDISTANCE, 125);
+  ObjectCreate("label_bid1", OBJ_LABEL, 0, 0, 0, 0, 0, 0, 0);
+  ObjectSetText("label_bid1", "Bid:", globalFontSize, "Arial", Red);
+  ObjectSet("label_bid1", OBJPROP_XDISTANCE, globalDistanceX1);
+  ObjectSet("label_bid1", OBJPROP_YDISTANCE, 130);
 
-  ObjectCreate("label_spread", OBJ_LABEL, 0, 0, 0, 0, 0, 0, 0);
-  ObjectSetText("label_spread", ".", 30, "Arial", LawnGreen);
-  ObjectSet("label_spread", OBJPROP_XDISTANCE, 48);
-  ObjectSet("label_spread", OBJPROP_YDISTANCE, 150);
+  ObjectCreate("label_spread1", OBJ_LABEL, 0, 0, 0, 0, 0, 0, 0);
+  ObjectSetText("label_spread1", "Spread:", globalFontSize, "Arial", LawnGreen);
+  ObjectSet("label_spread1", OBJPROP_XDISTANCE, globalDistanceX1);
+  ObjectSet("label_spread1", OBJPROP_YDISTANCE, 160);
 
-  /*
-  ObjectCreate ("arrow1",OBJ_ARROW, 0, Time[180], Low[10]);
-  ObjectSet("arrow1",OBJPROP_COLOR,DeepSkyBlue);
-  ObjectSet("arrow1",OBJPROP_WIDTH,20.0);
-  ObjectSet("arrow1",OBJPROP_ARROWCODE,242);
+  ObjectCreate("label_ask2", OBJ_LABEL, 0, 0, 0, 0, 0, 0, 0);
+  ObjectSetText("label_ask2", ".", globalFontSize, "Arial", DeepSkyBlue);
+  ObjectSet("label_ask2", OBJPROP_XDISTANCE, globalDistanceX2);
+  ObjectSet("label_ask2", OBJPROP_YDISTANCE, 100);
 
-  ObjectCreate("arrow2",OBJ_ARROW, 0, Time[160], Low[10]);
-  ObjectSet("arrow2",OBJPROP_COLOR,DeepSkyBlue);
-  ObjectSet("arrow2",OBJPROP_WIDTH,20.0);
-  ObjectSet("arrow2",OBJPROP_ARROWCODE,242);
+  ObjectCreate("label_bid2", OBJ_LABEL, 0, 0, 0, 0, 0, 0, 0);
+  ObjectSetText("label_bid2", ".", globalFontSize, "Arial", Red);
+  ObjectSet("label_bid2", OBJPROP_XDISTANCE, globalDistanceX2);
+  ObjectSet("label_bid2", OBJPROP_YDISTANCE, 130);
 
-  ObjectCreate("arrow3",OBJ_ARROW, 0, Time[140], Low[10]);
-  ObjectSet("arrow3",OBJPROP_COLOR,DeepSkyBlue);
-  ObjectSet("arrow3",OBJPROP_WIDTH,20.0);
-  ObjectSet("arrow3",OBJPROP_ARROWCODE,242);
-  */
-
+  ObjectCreate("label_spread2", OBJ_LABEL, 0, 0, 0, 0, 0, 0, 0);
+  ObjectSetText("label_spread2", ".", globalFontSize, "Arial", LawnGreen);
+  ObjectSet("label_spread2", OBJPROP_XDISTANCE, 233);
+  ObjectSet("label_spread2", OBJPROP_YDISTANCE, 160);
+ 
   return(0);
 }
 
@@ -59,9 +61,9 @@ int start() {
   Comment("Spread: " + DoubleToStr(spread, 1) + " (" + DoubleToStr(val, 5) +  ")");
 
   // bool ObjectCreate(string name, int type, int window, datetime time1, double price1, datetime time2=0, double price2=0, datetime time3=0, double price3=0)
-  ObjectSetText("label_ask", "Ask: "+DoubleToStr(Ask, 5), 20, "Arial", DeepSkyBlue);
-   ObjectSetText("label_bid", "Bid: "+DoubleToStr(Bid, 5), 20, "Arial", Red);
-  ObjectSetText("label_spread", "Spread: "+DoubleToStr(MarketInfo("EURUSD", MODE_SPREAD), 2), 20, "Arial", LawnGreen);
+  ObjectSetText("label_ask2", DoubleToStr(Ask, 5), globalFontSize, "Arial", DeepSkyBlue);
+  ObjectSetText("label_bid2", DoubleToStr(Bid, 5), globalFontSize, "Arial", Red);
+  ObjectSetText("label_spread2", "" + DoubleToStr(MarketInfo("EURUSD", MODE_SPREAD), 0), globalFontSize, "Arial", LawnGreen);
 
   /*
 
